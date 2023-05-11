@@ -18,7 +18,8 @@ export default {
 
   // Configurer les modules Nuxt.js à utiliser
   modules: [
-    '@nuxtjs/vuetify'
+    '@nuxtjs/axios',
+    
   ],
 
   buildModules: [
@@ -43,15 +44,26 @@ export default {
         }
       },
     }],
+    '@nuxtjs/axios',
     
   ],
   // Configuration des plugins pour l'application
   plugins: [
-    '~/plugins/vuetify.js'
+    '~/plugins/vuetify.js',
+    '~/plugins/axios.js',
   ],
 
   // Configuration pour les environnements de développement et de production
   env: {
+    auth: process.env.VUE_APP_DEFAULT_AUTH,
+    apikey: process.env.VUE_APP_APIKEY,
+    authdomain: process.env.VUE_APP_AUTHDOMAIN,
+    databaseurl: process.env.VUE_APP_DATABASEURL,
+    projectid: process.env.VUE_APP_PROJECTId,
+    storgebucket: process.env.VUE_APP_STORAGEBUCKET,
+    message: process.env.VUE_APP_MESSAGINGSENDERID,
+    appid: process.env.VUE_APP_APPId,
+    measurement: process.env.VUE_APP_MEASUREMENTID,
   },
 
   // Configuration pour le rendu côté client
@@ -60,6 +72,8 @@ export default {
       return [
         [ "@nuxt/babel-preset-app", options ]
       ]
-    }
+    },
+    vendor: ['axios'],
   }
+
 }

@@ -9,8 +9,10 @@
   },
   "dependencies": {
     "@nuxt/babel-preset-app": "^2.16.3",
+    "@nuxtjs/axios": "^5.13.6",
     "@nuxtjs/vuetify": "^1.12.3",
-    "nuxt": "2.15.7"
+    "nuxt": "2.15.7",
+    "sweetalert2": "^11.7.5"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.14",
