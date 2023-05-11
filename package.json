@@ -1,0 +1,18 @@
+{
+  "name": "my-app",
+  "scripts": {
+    "dev": "nuxt ",
+    "build": "nuxt build",
+    "generate": "nuxt generate",
+    "start": "nuxt start",
+    "tailwind": "npx tailwindcss -i ./static/app.css -o ./assets/css/main.css --watch"
+  },
+  "dependencies": {
+    "@nuxt/babel-preset-app": "^2.16.3",
+    "nuxt": "2.15.7"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.14",
+    "tailwindcss": "^3.3.2"
+  }
+}
