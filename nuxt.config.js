@@ -1,3 +1,5 @@
+import fr from 'vuetify/src/locale/fr'
+import en from 'vuetify/src/locale/fr'
 export default {
   // Ajoute un titre pour votre application
   css: [
@@ -16,12 +18,36 @@ export default {
 
   // Configurer les modules Nuxt.js à utiliser
   modules: [
-  
+    '@nuxtjs/vuetify'
   ],
 
+  buildModules: [
+    ['@nuxtjs/vuetify', {
+      iconfont: "mdi", // 'md' || 'mdi' || 'fa' || 'fa4'
+      lang: {
+        locales: { fr, en},
+        current: 'fr',
+      },
+      theme: {
+        themes:{
+          light: {
+            primary: '#b71c1c',
+            secondary: '#b0bec5',
+            dark: '#b0bec5',
+            accent: '#006958',
+            error: '#ff192c',
+            success: '#5cb85c',
+            warning:'#ff192c',
+            background: '#f8f8f8'
+          },
+        }
+      },
+    }],
+    
+  ],
   // Configuration des plugins pour l'application
   plugins: [
-    
+    '~/plugins/vuetify.js'
   ],
 
   // Configuration pour les environnements de développement et de production
