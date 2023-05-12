@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  layout: "master",
+  layout: "main",
   data() {
     return {};
   },
