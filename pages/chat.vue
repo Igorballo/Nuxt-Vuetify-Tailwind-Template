@@ -35,53 +35,15 @@
 
             <!-- Contacts -->
             <div class="tw-bg-grey-lighter tw-flex-1 tw-overflow-auto">
-              <div class="tw-px-3 tw-flex tw-items-center tw-bg-white tw-cursor-pointer">
+              <div @click="selectUser = user" v-for="(user, index) in users" :key="index" class="tw-bg-white tw-px-3 tw-flex tw-items-center hover:tw-bg-blue-100 tw-cursor-pointer">
                 <div>
                   <img class="tw-h-12 tw-w-12 tw-rounded-full"
-                       src="https://darrenjameseeley.files.wordpress.com/2014/09/expendables3.jpeg"/>
+                       :src="user.avatar"/>
                 </div>
                 <div class="tw-ml-4 tw-flex-1 tw-border-b tw-border-grey-lighter tw-py-2">
                   <div class="tw-flex tw-items-bottom tw-justify-between">
                     <h1 class="tw-text-gray-800 tw-font-semibold">
-                      New Movie! Expendables 4
-                    </h1>
-                    <h2 class="tw-text-xs tw-text-grey-darkest">
-                      12:45 pm
-                    </h2>
-                  </div>
-                  <h2 class="tw-text-gray-500 tw-mt-1 tw-text-sm">
-                    Get Andrés on this movie ASAP!
-                  </h2>
-                </div>
-              </div>
-              <div class="tw-bg-white tw-px-3 tw-flex tw-items-center hover:tw-bg-grey-lighter tw-cursor-pointer">
-                <div>
-                  <img class="tw-h-12 tw-w-12 tw-rounded-full"
-                       src="https://www.famousbirthdays.com/headshots/russell-crowe-6.jpg"/>
-                </div>
-                <div class="tw-ml-4 tw-flex-1 tw-border-b tw-border-grey-lighter tw-py-2">
-                  <div class="tw-flex tw-items-bottom tw-justify-between">
-                    <h1 class="tw-text-gray-800 tw-font-semibold">
-                      Russell Crowe
-                    </h1>
-                    <h2 class="tw-text-xs tw-text-grey-darkest">
-                      12:45 pm
-                    </h2>
-                  </div>
-                  <h2 class="tw-text-gray-500 tw-mt-1 tw-text-sm">
-                    Hold the line!
-                  </h2>
-                </div>
-              </div>
-              <div class="tw-bg-white tw-px-3 tw-flex tw-items-center hover:tw-bg-grey-lighter tw-cursor-pointer">
-                <div>
-                  <img class="tw-h-12 tw-w-12 tw-rounded-full"
-                       src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGpYTzuO0zLW7yadaq4jpOz2SbsX90okb24Z9GtEvK6Z9x2zS5"/>
-                </div>
-                <div class="tw-ml-4 tw-flex-1 tw-border-b tw-border-grey-lighter tw-py-2">
-                  <div class="tw-flex tw-items-bottom tw-justify-between">
-                    <h1 class="tw-text-gray-800 tw-font-semibold">
-                      Tom Cruise
+                      {{ user.username }}
                     </h1>
                     <h2 class="tw-text-xs tw-text-grey-darkest">
                       12:45 pm
@@ -108,11 +70,14 @@
                 </div>
                 <div class="tw-ml-4">
                   <h1 class="tw-text-gray-800 tw-font-semibold">
-                    New Movie! Expendables 4
+                    {{ selectUser.username }}
                   </h1>
                   <h2 class="tw-text-gray-500 tw-text-xs tw-mt-1">
-                    Andrés, Tom, Harrison, Arnold, Sylvester
+                    En ligne
                   </h2>
+<!--                  <h2 class="tw-text-gray-500 tw-text-xs tw-mt-1">-->
+<!--                    Andrés, Tom, Harrison, Arnold, Sylvester-->
+<!--                  </h2>-->
                 </div>
               </div>
 
@@ -283,26 +248,42 @@
 
 <script>
     export default{
-        layout: "main",
         //ici on declare les variables
         data(){
             return {
-
+              users: [],
+              selectUser: null,
             }
         },
         
         //ici on implemente les methodes
         methods:{
+          async getAllUsers() {
+            await axios
+                .get("/users")
+                .then((response) => {
+                  this.users = response.data.users;
+                  console.log("users", response.data.users)
 
+                  // Filtrer les événements ayant un statut égal à 1
+                  // this.events = allEvents.filter(event => event.status === 1);
+                  //
+                  // this.events.sort(
+                  //     (a, b) => new Date(b.date_debut) - new Date(a.date_debut)
+                  // );
+                })
+                .catch((error) => {
+                  this.showToast("error", "Une erreur s'est produite");
+                });
+          }
         },
 
 
         //ici on Monte les  methodes pour que ca charges les datas au moment du chargement de la page
         mounted(){
+          this.getAllUsers();
         },
     }
-</script>
-
 </script>
 
 <style scoped>
